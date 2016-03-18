@@ -8,6 +8,5 @@ before_script:
     - ln -s ../target/test-reports shippable/testresults
 
 script:
-  - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
   - echo $test
 
