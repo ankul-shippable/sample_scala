@@ -1,9 +1,23 @@
 language: scala
 
 scala:
-    - 2.11.0
+  - 2.11.0
 
 before_script:
-    - mkdir -p shippable/testresults
-    - ln -s ../target/test-reports shippable/testresults
+  - mkdir -p shippable/testresults
+  - ln -s ../target/test-reports shippable/testresults
+  - pwd
+
+script:
+  - pwd
+  - pushd $SHIPPABLE_BUILD_DIR/shippable
+  - ls -al
+  - popd
+  - pushd $SHIPPABLE_BUILD_DIR/shippable/testresults
+  - ls -al
+  - popd
+  - pushd ../target/test-reports
+  - ls -al
+  - popd
+  - echo $test
 
