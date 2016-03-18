@@ -6,15 +6,10 @@ scala:
 before_script:
     - mkdir -p shippable/testresults
     - ln -s ../target/test-reports shippable/testresults
-    - cd shippable/testresults
+    - cd shippable/testresults/test-reports
     - ls
 
 script:
   - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
-  - sbt clean scoverage:test
   - echo $test
-
-after_script:
-  - mkdir -p shippable/codecoverage
-  - mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverage/
 
