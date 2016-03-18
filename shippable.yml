@@ -6,8 +6,6 @@ scala:
 before_script:
     - mkdir -p shippable/testresults
     - ln -s ../target/test-reports shippable/testresults
-    - cd ../target/test-reports
-    - ls
 
 script:
   - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
