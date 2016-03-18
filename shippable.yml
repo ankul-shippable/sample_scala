@@ -16,8 +16,5 @@ script:
   - pushd $SHIPPABLE_BUILD_DIR/shippable/testresults
   - ls -al
   - popd
-  - pushd ../target/test-reports
-  - ls -al
-  - popd
   - echo $test
 
