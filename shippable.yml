@@ -1,14 +1,29 @@
 language: scala
 
 scala:
-    - 2.11.0
+  - 2.11.0
+  - 2.9.3
+  - 2.10.5
+  - 2.12.4
+    
+jdk:
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
 
-script:
-  - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
-  - sbt clean scoverage:test
-  - echo $test
-
-after_script:
-  - mkdir -p shippable/codecoverage
-  - mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverage/
-
+build:
+  pre_ci_boot:
+    image_name: drydock/u14scaall
+    image_tag: master
+    pull: true
+  ci:
+    - cat /etc/drydock/.env
+    - java -version
+    - echo $SHIPPABLE_SCALA_VERSION
+    - echo $PATH
+    - echo $SCALA_HOME
+    - export PATH=$PATH:$SHIPPABLE_REPO_DIR
+    - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
+    - sbt clean scoverage:test
+    - mkdir -p shippable/codecoverage
+    - mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverag
