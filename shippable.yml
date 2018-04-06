@@ -1,28 +1,26 @@
 language: scala
 
-scala:
-  - 2.10.7
-  - 2.11.12
-  - 2.12.4
+#scala:
+#  - 2.10.7
+#  - 2.11.12
+#  - 2.12.4
     
-jdk:
-  - openjdk7
-  - oraclejdk7
-  - oraclejdk8
+#jdk:
+#  - openjdk7
+#  - oraclejdk7
+#  - oraclejdk8
 
 build:
-  pre_ci_boot:
-    image_name: drydock/u14scaall
-    image_tag: master
-    pull: true
   ci:
-    - cat /etc/drydock/.env
-    - java -version
-    - echo $SHIPPABLE_SCALA_VERSION
-    - echo $PATH
-    - echo $SCALA_HOME
-    - export PATH=$PATH:$SHIPPABLE_REPO_DIR
-    - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
-    - sbt clean scoverage:test
-    - mkdir -p shippable/codecoverage
-    - mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverag
+    - if [ "$(($BUILD_NUMBER % 2))" -eq 0 ]; then failing it; fi # fail if build number is odd
+    - printenv  
+    #- cat /etc/drydock/.env
+    #- java -version
+    #- echo $SHIPPABLE_SCALA_VERSION
+    #- echo $PATH
+    #- echo $SCALA_HOME
+    #- export PATH=$PATH:$SHIPPABLE_REPO_DIR
+    #- export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
+    #- sbt clean scoverage:test
+    #- mkdir -p shippable/codecoverage
+    #- mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverag
