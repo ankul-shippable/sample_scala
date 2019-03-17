@@ -14,7 +14,7 @@ build:
   ci:
     - if [ "$(($BUILD_NUMBER % 2))" -eq 0 ]; then failing it; fi # fail if build number is even
     - printenv  
-    #- cat /etc/drydock/.env
+    - cat /etc/drydock/.env
     #- java -version
     #- echo $SHIPPABLE_SCALA_VERSION
     #- echo $PATH
